@@ -1,0 +1,71 @@
+﻿
+--[1] 게시판용 테이블
+Create Table Notes(
+	NoteId INT Identity(1,1) Primary Key, --글번호
+	NoteWriter INT, --글작성자
+	NoteTitle NVARCHAR(150), --글제목
+	NoteContent NVARCHAR(MAX), --글내용
+	NoteFileName NVARCHAR(MAX), --글파일명
+	NoteFileSize Int default 0, --글파일크기
+	NoteReadCount Int default 0, --글조회수
+	NoteLikeCount Int default 0, --글좋아요
+	NoteCommentCount Int default 0, --댓글수
+	NoteCategory NVARCHAR(25), --글카테고리(확장)
+	NoteRemark NVARCHAR(255), --글비고
+	NoteInsDate DateTime Default GetDate() , --글작성일
+	NoteInsIp NVARCHAR(15), --글작성IP
+	NoteUpdDate datetime, --글수정일
+	NoteUpdIp NVARCHAR(15), --글수정IP
+	NoteDel bit , --글삭제여부
+);
+
+
+
+CREATE TABLE [dbo].[NoteCommnets]
+(
+	[NoteCommentId] INT IDENTITY (1, 1), --댓글번호
+	[NoteCommentNoteId] INT , --글번호
+	[NoteCommentWriter] INT , --댓글작성자
+	[NoteCommentOpinion] NVARCHAR(MAX),  --댓글내용
+	[NoteCommentFileName] NVARCHAR(MAX), --댓글파일명
+	[NoteCommentFileSize] Int default 0, --댓글파일크기
+	[NoteCommentRemark] NVARCHAR(255), --비고
+	[NoteCommentParentOp] INT , --부모댓글
+	[NoteCommentInsDate] datetime default (getdate()),  --댓글작성일
+	[NoteCommentUpdDate] datetime ,  --댓글수정일
+	[NoteCommentDel] bit,  --댓글삭제여부
+
+	PRIMARY KEY CLUSTERED ([NoteCommentId] ASC)
+);
+
+
+
+CREATE TABLE [dbo].[Users](
+	UserNo INT IDENTITY (1, 1),
+	UserId NVARCHAR(50) ,
+	UserPassword  NVARCHAR(50) ,
+	UserNickName  NVARCHAR(50) ,
+	UserName  NVARCHAR(50) ,
+	UserPostcode  NVARCHAR(10) ,
+	UserAddress1  NVARCHAR(50) ,
+	UserAddress2  NVARCHAR(50) ,
+	UserTel NVARCHAR(20) ,
+	UserEmail NVARCHAR(50) ,
+	UserImg NVARCHAR(250) ,
+	UserRemark NVARCHAR(250) ,
+	UserRole INT default 0,
+	UserLock bit ,
+	UserDel bit ,
+	UserInsDate datetime default (getdate()),
+	UserUpdDate datetime,
+	PRIMARY KEY CLUSTERED ([UserNo] ASC)
+);
+
+
+SELECT * FROM  [dbo].[NoteComments] 
+ORDER BY 
+	CASE 
+	WHEN [NoteComments].NoteCommentParentOp is null
+	THEN [NoteComments].NoteCommentId
+	ELSE [NoteComments].NoteCommentParentOp
+	END

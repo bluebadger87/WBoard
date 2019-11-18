@@ -4,15 +4,22 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WBoard.DataContext;
 using WBoard.Models;
 
 namespace WBoard.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly MainContext _context;
+        public HomeController(MainContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            //테스트 이메일
+
             return View();
         }
 
