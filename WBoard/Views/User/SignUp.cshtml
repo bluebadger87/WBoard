@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="UserPostcode" class="control-label"></label>
-                <input asp-for="UserPostcode" class="form-control" placeholder="1740054 (Only 7digit number)" />
+                <input asp-for="UserPostcode" class="form-control" placeholder="1740054 (Only 7digit number)" maxlength="7" step="1"  />
                 <span asp-validation-for="UserPostcode" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -88,14 +88,24 @@
 
 
         ////우편번호 -> 숫자만 & 7자리 입력
+        $("#UserPostcode").on("keypress keyup", function (event) {
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+            if ($("#UserPostcode").val().length == 7) {
+                alert("hi");
+            };
+        });
+
+
+
+        //우편번호 -> 숫자만 & 7자리 입력
         //$("#UserPostcode").keypress(function (e) {
         //    var keyCode = e.which ? e.which : e.keyCode
-        //    if (!(keyCode >= 48 && keyCode <= 57)) {
+        //    if (!(keyCode >= 48 && keyCode <= 57 )) {
         //        return false;
         //    };
-        //if ($("#UserPostcode").val().length > 6) {
-        //    return false;
-        //};
+
         //    //if ($("#UserPostcode").val().length > 6) {
         //    //    alert("hi");
         //    //};
