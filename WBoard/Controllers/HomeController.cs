@@ -12,7 +12,7 @@ namespace WBoard.Controllers
     {
         public IActionResult Index()
         {
-            //테스트 슬랙
+            //테스트 슬랙 2
             return View();
         }
 
