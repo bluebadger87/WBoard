@@ -1,0 +1,153 @@
+﻿@model WBoard.Models.User
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<h2>SignUp</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignUp" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserLoginId" class="control-label"></label>
+                <input asp-for="UserLoginId" class="form-control" />
+                <span asp-validation-for="UserLoginId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword1" class="control-label"></label>
+                <input asp-for="UserPassword1" class="form-control" />
+                <span asp-validation-for="UserPassword1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword2" class="control-label"></label>
+                <input asp-for="UserPassword2" class="form-control" />
+                <span asp-validation-for="UserPassword2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPostcode" class="control-label"></label>
+                <input asp-for="UserPostcode" class="form-control" placeholder="1740054 (Only 7digit number)" />
+                <span asp-validation-for="UserPostcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAddress1" class="control-label"></label>
+                <input asp-for="UserAddress1" class="form-control" readonly />
+                <span asp-validation-for="UserAddress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAddress2" class="control-label"></label>
+                <input asp-for="UserAddress2" class="form-control" />
+                <span asp-validation-for="UserAddress2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserTel" class="control-label"></label>
+                <input asp-for="UserTel" class="form-control" placeholder="07040868509 (OnlyNumber)" />
+                <span asp-validation-for="UserTel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserEmail" class="control-label"></label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserRemark" class="control-label"></label>
+                <input asp-for="UserRemark" class="form-control" />
+                <span asp-validation-for="UserRemark" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+<!--
+<h1>郵便番号</h1>
+ 郵便番号入力のテキストボックス
+<input type="text" id="zipcode" value="" maxlength="7">
+<input type="button" id="search_btn" value="検索">
+<p>※7桁の半角数字で入力してください</p>
+
+検索結果の表示エリア
+<div id="zip_result"></div>
+    -->
+<script>
+    $(function () {
+
+
+        ////우편번호 -> 숫자만 & 7자리 입력
+        //$("#UserPostcode").keypress(function (e) {
+        //    var keyCode = e.which ? e.which : e.keyCode
+        //    if (!(keyCode >= 48 && keyCode <= 57)) {
+        //        return false;
+        //    };
+        //if ($("#UserPostcode").val().length > 6) {
+        //    return false;
+        //};
+        //    //if ($("#UserPostcode").val().length > 6) {
+        //    //    alert("hi");
+        //    //};
+        //});
+
+
+        //検索ボタンをクリックされたときに実行
+        //$("#UserPostcode").focusout(function () {
+        //    //入力値をセット
+        //    var param = { zipcode: $('#zipcode').val() }
+        //    //zipcloudのAPIのURL
+        //    var send_url = "http://zipcloud.ibsnet.co.jp/api/search";
+        //    $.ajax({
+        //        type: "GET",
+        //        cache: false,
+        //        data: param,
+        //        url: send_url,
+        //        dataType: "jsonp",
+        //        success: function (res) {
+        //            //結果によって処理を振り分ける
+        //            if (res.status == 200) {
+        //                //処理が成功したとき
+        //                //該当する住所を表示
+        //                var html = '';
+        //                for (var i = 0; i < res.results.length; i++) {
+        //                    var result = res.results[i];
+        //                    console.log(res.results);
+        //                    html += '<h2>住所' + (i + 1) + '</h2>';
+        //                    html += '<div>都道府県コード：' + result.prefcode + '</div>';
+        //                    html += '<div>都道府県：' + result.address1 + '</div>';
+        //                    html += '<div>市区町村：' + result.address2 + '</div>';
+        //                    html += '<div>町域：' + result.address3 + '</div>';
+        //                    html += '<div>都道府県(カナ)：' + result.kana1 + '</div>';
+        //                    html += '<div>市区町村(カナ)：' + result.kana1 + '</div>';
+        //                    html += '<div>町域(カナ)：' + result.kana1 + '</div>';
+        //                }
+        //                $('#zip_result').html(html);
+        //            } else {
+        //                //エラーだった時
+        //                //エラー内容を表示
+        //                $('#zip_result').html(res.message);
+
+        //            }
+        //        },
+        //        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //            console.log(XMLHttpRequest);
+        //        }
+        //    });
+        //});
+
+
+
+
+    });
+</script>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,36 +9,38 @@ namespace WBoard.Models
 {
     public class User
     {
-
         public int UserId { get; set; } //유저번호
         
-        [Required]
+        [Required, DisplayName("ID")]
         public string UserLoginId { get; set; } //유저로그인아이디
 
-        [Required, DataType(DataType.Password)]
+        [Required, DataType(DataType.Password), DisplayName("Password")]
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
         public string UserPassword1 { get; set; } //유저로그인비번
 
-        [Required, DataType(DataType.Password)]
+        [Required, DataType(DataType.Password), DisplayName("PasswordCheck")]
         [Compare("UserPassword1", ErrorMessage = "Password doesn't match.")] 
         public string UserPassword2 { get; set; } //유저로그인비번확인용
 
-        public string UserNickName { get; set; } //유저닉네임
-
-        [Required]
+        [DisplayName("Name")]
         public string UserName { get; set; } //유저네임
 
+        [DisplayName("Postcode")]
         public string UserPostcode { get; set; } //유저우편번호
 
+        [DisplayName("Address")]
         public string UserAddress1 { get; set; } //유저주소1
 
+        [DisplayName("AddressDetail")]
         public string UserAddress2 { get; set; } //유저주소2
 
+        [DisplayName("PhoneNumber")]
         public string UserTel { get; set; } //유저연락처
 
-        [Required, EmailAddress]
+        [EmailAddress, DisplayName("Email")]
         public string UserEmail { get; set; } //유저이메일
 
+        [DisplayName("Remark")]
         public string UserRemark { get; set; } //유저비고
 
         public int UserRole { get; set; } //유저자격
